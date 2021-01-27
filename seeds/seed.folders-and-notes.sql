@@ -7,7 +7,7 @@ VALUES
     ('Movies'),
     ('Recipes');
 
-INSERT INTO notes (name, content, folder_id)
+INSERT INTO notes (name, content, folderId)
 VALUES
     ('Music Notes', 'This is a list of music notes. Not the notes you play, the notes you read.', 1),
     ('TV Shows', 'These are notes about television shows.', 2),

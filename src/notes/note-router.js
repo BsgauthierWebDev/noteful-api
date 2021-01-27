@@ -22,8 +22,8 @@ noteRouter
 			.catch(next)
 	})
 	.post(jsonParser, (req, res, next) => {
-		const { name, content, folder_id } = req.body
-		const newNote = { name, content, folder_id }
+		const { name, content, folderId } = req.body
+		const newNote = { name, content, folderId }
 
 		// check for missing fields
 		for (const [key, value] of Object.entries(newNote)) {
@@ -62,13 +62,13 @@ noteRouter
 		res.json(serializeNote(res.note))
 	})
 	.patch(jsonParser, (req, res, next) => {
-		const { name, content, folder_id } = req.body
-		const noteToUpdate = { name, content, folder_id }
+		const { name, content, folderId } = req.body
+		const noteToUpdate = { name, content, folderId }
 
-		if (!name && !content && !folder_id) {
+		if (!name && !content && !folderId) {
 			return res.status(400).json({
 				error: {
-					message: `Request body must contain a 'name', 'content' or 'folder_id' field`
+					message: `Request body must contain a 'name', 'content' or 'folderId' field`
 				}
 			})
 		}
