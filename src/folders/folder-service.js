@@ -9,7 +9,7 @@ const FolderService = {
             .insert(newFolder)
             .into('folders')
             .returning('*')
-            .then(rows => [0])
+            .then(rows => rows[0])
     },
 
     getById(knex, id) {

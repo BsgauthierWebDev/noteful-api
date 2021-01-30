@@ -8,7 +8,7 @@ const NoteService = {
             .insert(newNote)
             .into('notes')
             .returning('*')
-            .then(rows => [0])
+            .then(rows => rows[0])
     },
 
     getById(knex, id) {
