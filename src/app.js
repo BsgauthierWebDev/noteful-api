@@ -24,13 +24,27 @@ app.get('/', (req, res) => {
 app.use('/api/folders', folderRouter)
 app.use('/api/notes', noteRouter)
 
+//Fix the below code once fully operational
+// app.use(function errorHandler(error, req, res, next) {
+//     let response
+//     if (NODE_ENV === 'production') {
+//         response = {error: {message: 'True'}}
+//     } else {
+//         console.error(error)
+//         response = {message: error.message, error}
+//     }
+//     res.status(500).json(response)
+// })
+
 app.use(function errorHandler(error, req, res, next) {
     let response
-    if (NODE_ENV === 'production') {
+    if (false && NODE_ENV === 'production') {
         response = {error: {message: 'True'}}
     } else {
-        console.error(error)
-        response = {message: error.message, error}
+        console.log("This is a test")
+        response = {
+            stack: new Error().stack,
+            message: error.message, error}
     }
     res.status(500).json(response)
 })

@@ -26,7 +26,7 @@ folderRouter
 
         for (const [key, value] of Object.entries(newFolder)) {
             if (value == null) {
-                return res.statusCode(400).json({
+                return res.status(400).json({
                     error: {message: `Missing '${key}' in request body`}
                 })
             }
@@ -34,8 +34,8 @@ folderRouter
 
         FolderService.insertFolder(req.app.get('db'), newFolder)
             .then(folder => {
-                res.statusCode(201)
-                    .location(path.posix.join(req.oroginalUrl, `${folder.id}`))
+                res.status(201)
+                    .location(path.posix.join(req.originalUrl, `${folder.id}`))
                     .json(serializeFolder(folder))
             })
             .catch(next)
@@ -47,7 +47,7 @@ folderRouter
         FolderService.getById(req.app.get('db'), req.params.folderId)
             .then(folder => {
                 if (!folder) {
-                    return res.statusCode(404).json({
+                    return res.status(404).json({
                         error: {message: `Folder doesn't exist`}
                     })
                 }
@@ -64,7 +64,7 @@ folderRouter
         const folderToUpdate = {name}
 
         if (!name) {
-            return res.statusCode(400).json({
+            return res.status(400).json({
                 error: {message: `Request body must contain a 'name`}
             })
         }
@@ -75,14 +75,14 @@ folderRouter
             folderToUpdate
         )
             .then(() => {
-                res.statusCode(204).end()
+                res.status(204).end()
             })
             .catch(next)
     })
     .delete((req, res, next) => {
         FolderService.deleteFolder(req.app.get('db'), req.params.folderId)
             .then(() => {
-                res.statusCode(204).end()
+                res.status(204).end()
             })
             .catch(next)
     })
